@@ -6,4 +6,8 @@ module ApplicationHelper
   def description
     content_for?(:description) ? content_for(:description) : 'Modal'
   end
+
+  def body_class
+    "#{controller_name} #{action_name}"
+  end
 end

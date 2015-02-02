@@ -4,12 +4,18 @@ h3 Урок #{@lesson.id}
 
 p
   strong Название:
-p
+  br/
   = @lesson.name
 p
   strong Описание:
-p
+  br/
   = @lesson.description
+
+.images
+  - @lesson.images.each do |image|
+    = image_tag image.file.url(:medium), class: 'image' if image.persisted?
+
+
 
 = link_to lessons_path, class: "btn btn-link" do
   i.icon-arrow-left

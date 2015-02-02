@@ -13,10 +13,12 @@ class LessonsController < ApplicationController
   # GET /lessons/new
   def new
     @lesson = Lesson.new
+    @lesson.images.build
   end
 
   # GET /lessons/1/edit
   def edit
+    @lesson.images.build
   end
 
   # POST /lessons
@@ -53,6 +55,7 @@ class LessonsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lesson_params
-      params.require(:lesson).permit(:name, :description)
+      params.require(:lesson).permit(:name, :description,
+        images_attributes: [:id, :file, :_destroy])
     end
 end
