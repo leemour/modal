@@ -1,0 +1,11 @@
+ru:
+  activerecord:
+    models:
+      lesson:
+        one: Урок
+        other: Уроки
+    attributes:
+      lesson:
+        name: Имя
+        description: Описание
+        images: Фото

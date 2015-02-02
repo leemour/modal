@@ -11,6 +11,6 @@
           nav.navbar-inner
             ul.nav
               li
-                = link_to 'Home', root_path
+                = link_to 'Уроки', root_path
               li
-                == render 'layouts/navigation_links'
+                = link_to 'Создать урок', new_lesson_path

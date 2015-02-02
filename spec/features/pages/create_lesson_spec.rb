@@ -14,11 +14,11 @@ feature 'Teacher creates a lesson',
   #   When I visit the home page
   #   Then I see "Welcome"
   background do
-    visit root_path
+    visit new_lesson_path
   end
 
   scenario 'page has correct content' do
-    expect(page).to have_css "h1", "Тестовое задание"
+    expect(page).to have_css "h1", "Новый урок"
     expect(page).to have_css "label", "Название урока"
     expect(page).to have_css "label", "Описание задание"
     expect(page).to have_css "input", "Загрузить файл"

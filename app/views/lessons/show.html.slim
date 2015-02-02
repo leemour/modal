@@ -1,0 +1,19 @@
+= content_for :title, "Урок #{@lesson.id}"
+
+h3 Урок #{@lesson.id}
+
+p
+  strong Название:
+p
+  = @lesson.name
+p
+  strong Описание:
+p
+  = @lesson.description
+
+= link_to lessons_path, class: "btn btn-link" do
+  i.icon-arrow-left
+  |  Назад
+
+= link_to 'Править', [:edit, @lesson], class: "btn btn-link"
+

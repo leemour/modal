@@ -1,0 +1,12 @@
+= content_for :title, "Редактрование урока #{@lesson.id}"
+
+h1 Редактирование урока
+
+== render 'form'
+
+= link_to 'Открыть', @lesson
+
+= link_to lessons_path, class: "btn btn-link" do
+  i.icon-arrow-left
+  |  Назад
+

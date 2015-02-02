@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root to: 'pages#index'
+  resources :lessons
+
+  root to: 'lessons#index'
 end

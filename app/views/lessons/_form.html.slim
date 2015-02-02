@@ -1,0 +1,16 @@
+= form_for @lesson do |f|
+  - if @lesson.errors.any?
+    #error_explanation
+      h2 = "Не получилось сохранить Урок: #{@lesson.errors.count} #{Russian.p(@lesson.errors.count, 'ошибка', 'ошибки', 'ошибок')}:"
+      ul
+        - @lesson.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+
+  .actions = f.submit "Сохранить урок", class: 'btn btn-success'

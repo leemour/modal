@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 2.3.2.2'
 gem 'high_voltage'
 gem 'slim-rails'
+gem 'russian'
 gem 'thin'
 
 group :development do
@@ -38,6 +39,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'shoulda-matchers'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'

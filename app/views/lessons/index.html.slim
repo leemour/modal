@@ -1,0 +1,30 @@
+= content_for :title, "Уроки"
+
+.lessons
+  h1 Тестовое задание
+  h3 Заргузка группы файлов в модальном окне
+
+  h4 Уроки
+
+  table.table.table-striped.table-bordered
+    thead
+      tr
+        th Название
+        th Описание
+        th Фото
+        th
+
+    tbody
+      - @lessons.each do |lesson|
+        tr
+          td = lesson.name
+          td = lesson.description
+          td
+          td
+            = link_to 'Показать', lesson, class: 'btn btn-link'
+            = link_to 'Редактировать', [:edit, lesson], class: 'btn btn-link'
+            = link_to 'Удалить', lesson, data: {confirm: 'Вы уверены?'}, method: :delete, class: 'btn btn-link'
+
+  br
+
+  = link_to 'Создать урок', new_lesson_path, class: 'btn btn-success'
