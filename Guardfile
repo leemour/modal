@@ -35,9 +35,19 @@ guard :bundler do
   files.each { |file| watch(helper.real_path(file)) }
 end
 
-guard 'rails' do
+guard :rails do
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
+end
+
+guard :livereload do
+  watch(%r{app/views/.+\.(erb|haml|slim)$})
+  watch(%r{app/assets/.+\.(css|sass)$}) { |m| "/assets/application.css"}
+  watch(%r{app/helpers/.+\.rb})
+  watch(%r{public/.+\.(css|js|html)})
+  watch(%r{config/locales/.+\.yml})
+  # Rails Assets Pipeline
+  watch(%r{(app|vendor)/assets/\w+/(.+\.(css|js|html)).*})  { |m| "/assets/#{m[2]}" }
 end
 
 
