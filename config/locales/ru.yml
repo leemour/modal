@@ -4,8 +4,20 @@ ru:
       lesson:
         one: Урок
         other: Уроки
+      lesson_image:
+        one: Фото
+        other: Фото
+      image:
+        one: Фото
+        other: Фото
     attributes:
       lesson:
-        name: Имя
+        name: Название
         description: Описание
         images: Фото
+      lesson_image:
+        file: Файл
+      images:
+        file: Файл фотографии
+        file_content_type: Тип фотографии
+        file_file_name: Расширение

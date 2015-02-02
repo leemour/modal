@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202062750) do
+ActiveRecord::Schema.define(version: 20150202101750) do
+
+  create_table "lesson_images", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+    t.integer  "lesson_id"
+  end
+
+  add_index "lesson_images", ["lesson_id"], name: "index_lesson_images_on_lesson_id"
 
   create_table "lessons", force: true do |t|
     t.string   "name"
