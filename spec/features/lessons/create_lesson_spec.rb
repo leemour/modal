@@ -62,7 +62,15 @@ feature 'Teacher creates a lesson',
           to match(/\/uploads\/lesson_images\/\d+\/test_medium.png/)
       end
 
-      scenario 'invalid' do
+      scenario 'invalid file type' do
+        attach_file "Файл", File.join(Rails.root, "spec", "fixtures", "test.txt")
+        click_on 'Сохранить урок'
+
+        expect(page).to_not have_content 'Урок успешно создан.'
+        expect(page).to have_content 'Не получилось сохранить Урок'
+      end
+
+      scenario 'invalid file size' do
         attach_file "Файл", File.join(Rails.root, "spec", "fixtures", "test.txt")
         click_on 'Сохранить урок'
 

@@ -28,6 +28,7 @@ class LessonsController < ApplicationController
     if @lesson.save
       redirect_to @lesson, notice: 'Урок успешно создан.'
     else
+      @lesson.images.build if @lesson.images.empty?
       render :new
     end
   end

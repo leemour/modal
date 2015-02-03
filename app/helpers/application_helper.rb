@@ -1,10 +1,10 @@
 module ApplicationHelper
-  def title
-    content_for?(:title) ? content_for(:title) : 'Modal'
+  def title(text)
+    text.empty? ? 'Modal': text
   end
 
-  def description
-    content_for?(:description) ? content_for(:description) : 'Modal'
+  def description(text)
+    text.empty? ? 'Modal' : text
   end
 
   def body_class

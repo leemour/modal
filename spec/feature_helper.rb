@@ -27,5 +27,8 @@ RSpec.configure do |config|
 
   config.after(:suite) do
     FileUtils.rm_rf(Dir["#{Rails.root}/spec/test_files/"])
+    1.upto(3) do |num| # remove uploads from features tests
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/lesson_images/#{num}"])
+    end
   end
 end
