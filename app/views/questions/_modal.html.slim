@@ -1,0 +1,9 @@
+.modal.hide.fade id=id
+  .modal-header
+    button.close aria-hidden="true" data-dismiss="modal" type="button" &times;
+    h3= question.try(:persisted?) ? "Редактировать вопрос" : "Новый вопрос"
+  .modal-body
+    = render 'questions/form', question: question
+  .modal-footer
+    a.btn href="#" Закрыть
+    a.btn.btn-success.submit-form href="#" Сохранить вопрос

@@ -14,3 +14,10 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require lessons
+
+
+$(function() {
+  $('.modal').on('click', '.submit-form', function (ev) {
+    $(this).closest('.modal').find('form').submit();
+  });
+});

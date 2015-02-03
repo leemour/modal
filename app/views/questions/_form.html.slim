@@ -1,0 +1,28 @@
+- question.answers.build
+
+- if question.errors.any?
+  #error_explanation
+    h2 Не получилось сохранить вопрос
+    ul.errors
+      - question.errors.full_messages.each do |message|
+        li = message
+
+= form_for question, remote: true do |f|
+  .field
+    = f.label :text
+    = f.text_field :text
+  .field
+    h4 Ответы
+    = f.fields_for :answers do |a|
+      .form-group.answer
+        - if a.object.persisted?
+          = a.text_field :text, value: a.object.text
+          | Удалить
+          = a.check_box '_destroy'
+        - else
+          = a.label :text
+          = a.text_field :text
+          = a.label :correct
+          = a.check_box :correct
+
+  .actions = f.submit "Сохранить вопрос", class: 'btn btn-success hide'

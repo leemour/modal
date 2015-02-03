@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203100732) do
+ActiveRecord::Schema.define(version: 20150203114555) do
 
   create_table "answers", force: true do |t|
     t.string   "text"
@@ -47,6 +47,9 @@ ActiveRecord::Schema.define(version: 20150203100732) do
     t.boolean  "final"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "lesson_id"
   end
+
+  add_index "questions", ["lesson_id"], name: "index_questions_on_lesson_id"
 
 end
