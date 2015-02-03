@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150202101750) do
+ActiveRecord::Schema.define(version: 20150203100732) do
+
+  create_table "answers", force: true do |t|
+    t.string   "text"
+    t.integer  "question_id"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
 
   create_table "lesson_images", force: true do |t|
     t.datetime "created_at"
@@ -28,6 +38,13 @@ ActiveRecord::Schema.define(version: 20150202101750) do
   create_table "lessons", force: true do |t|
     t.string   "name"
     t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "questions", force: true do |t|
+    t.string   "text"
+    t.boolean  "final"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
