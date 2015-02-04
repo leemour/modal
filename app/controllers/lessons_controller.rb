@@ -24,9 +24,8 @@ class LessonsController < ApplicationController
   # POST /lessons
   def create
     @lesson = Lesson.new(lesson_params)
-
     if @lesson.save
-      questions_ids = params[:lesson][:questions]
+      questions_ids = params[:questions]
       Question.where(id: questions_ids).update_all(lesson_id: @lesson.id)
       redirect_to @lesson, notice: 'Урок успешно создан.'
     else

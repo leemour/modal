@@ -13,6 +13,9 @@
     = f.label :description
     = f.text_area :description
 
+  - lesson_questions.each do |question_id|
+    = hidden_field_tag "questions[]", question_id
+
   .form-group
     h4 Фото
     = f.fields_for :images do |i|

@@ -19,4 +19,8 @@ module ApplicationHelper
     t("model.#{gender}.#{action}",
       model: t("activerecord.models.#{model}", count: 1))
   end
+
+  def lesson_questions
+    params[:questions] || []
+  end
 end
