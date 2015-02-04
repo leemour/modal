@@ -1,3 +1,37 @@
 // Place all the styles related to the questions controller here.
 // They will automatically be included in application.css.
 // You can use Sass here: http://sass-lang.com/
+
+.questions
+  .question
+    margin: 15px 0 20px
+    .question-text
+      font-size: 1.2em
+      span
+        margin-left: 30px
+    .answer
+      font-size: 0.9em
+    .actions
+      .btn
+        margin: 10px 5px
+        &:first-child
+        margin-left: 0
+
+.modal
+  input
+    display: inline-block
+    vertical-align: middle
+  .answer
+    label.checkbox
+      display: inline-block
+      margin: 0 20px
+      vertical-align: middle
+    td.text
+      width: 40%
+    td.correct
+      width: 40%
+    .field_with_errors
+      padding: 2px
+      display: inline-block
+      input
+        margin-bottom: 0

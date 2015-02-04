@@ -10,6 +10,12 @@ ru:
       image:
         one: Фото
         other: Фото
+      question:
+        one: Вопрос
+        other: Вопросы
+      answer:
+        one: Ответ
+        other: Ответы
     attributes:
       lesson:
         name: Название
@@ -21,3 +27,21 @@ ru:
         file: Файл фотографии
         file_content_type: Тип фотографии
         file_file_name: Расширение
+      question:
+        text: Текст вопроса
+        final: Для итогового тестирования
+      answer:
+        text: Текст ответа
+        correct: Является правильным
+      answers:
+        text: Текст ответа
+        correct: Является правильным
+  model:
+    male:
+      created: "%{model} успешно создан."
+      updated: "%{model} успешно обновлен."
+      deleted: "%{model} успешно удален."
+    female:
+      created: "%{model} успешно создана."
+      updated: "%{model} успешно обновлена."
+      deleted: "%{model} успешно удалена."

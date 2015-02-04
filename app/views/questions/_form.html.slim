@@ -1,7 +1,7 @@
-- question.answers.build
+- question.answers.build if question.answers.empty? || question.answers.last.persisted?
 
 - if question.errors.any?
-  #error_explanation
+  #error_explanation.question-errors
     h2 Не получилось сохранить вопрос
     ul.errors
       - question.errors.full_messages.each do |message|
@@ -11,18 +11,26 @@
   .field
     = f.label :text
     = f.text_field :text
-  .field
+    = f.label :final, class: 'checkbox' do
+      = f.check_box :final
+      = t('activerecord.attributes.question.final')
+  .form-group
     h4 Ответы
-    = f.fields_for :answers do |a|
-      .form-group.answer
-        - if a.object.persisted?
-          = a.text_field :text, value: a.object.text
-          | Удалить
-          = a.check_box '_destroy'
-        - else
-          = a.label :text
-          = a.text_field :text
-          = a.label :correct
-          = a.check_box :correct
+    table
+      = f.fields_for :answers do |a|
+        tr.answer
+          td.text
+            = a.label :text
+            = a.text_field :text
 
-  .actions = f.submit "Сохранить вопрос", class: 'btn btn-success hide'
+          td.correct
+            = a.label :correct, class: 'checkbox' do
+              = a.check_box :correct
+              = t('activerecord.attributes.answer.correct')
+
+          td.destroy
+            - if a.object.persisted?
+              | Удалить
+              = a.check_box '_destroy'
+
+  = link_to "Добавить ответ", '#', class: "add-answer btn btn-info btn-small"

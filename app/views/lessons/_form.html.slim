@@ -1,11 +1,11 @@
-= form_for @lesson, html: { multipart: true } do |f|
-  - if @lesson.errors.any?
-    #error_explanation
-      h2 Не получилось сохранить Урок:
-      ul.errors
-        - @lesson.errors.full_messages.each do |message|
-          li = message
+- if @lesson.errors.any?
+  #error_explanation
+    h2 Не получилось сохранить Урок:
+    ul.errors
+      - @lesson.errors.full_messages.each do |message|
+        li = message
 
+= form_for @lesson, html: { multipart: true } do |f|
   .field
     = f.label :name
     = f.text_field :name
@@ -13,25 +13,31 @@
     = f.label :description
     = f.text_area :description
 
-  = f.label :images, class: 'control-label'
-  = f.fields_for :images do |i|
-    .form-group.file-upload
-      - if i.object.persisted?
-        = link_to i.object.file.url do
-          = image_tag i.object.file.url(:thumb)
-        br/
-        = i.object.file.name
-        br/
-        | Удалить
-        = i.check_box '_destroy'
-      - else
-        = i.label :file
-        = i.file_field :file
+  .form-group
+    h4 Фото
+    = f.fields_for :images do |i|
+      .file-upload
+        - if i.object.persisted?
+          = link_to i.object.file.url do
+            = image_tag i.object.file.url(:thumb)
+          br/
+          = i.object.file.name
+          br/
+          | Удалить
+          = i.check_box '_destroy'
+        - else
+          = i.label :file
+          = i.file_field :file
 
-  = link_to "Добавить файл", '#', class: "add-file btn btn-info btn-mini"
+    = link_to "Добавить еще файл", '#', class: "add-file btn btn-info btn-small"
 
-  .field
-    = link_to "Добавить вопрос", "#", "data-target" => '#newQuestionModal', class: "btn", "data-toggle" => "modal"
+  .form-group
+    h4 Вопросы
+    ol.questions
+      - @lesson.questions.each do |question|
+        li= render 'questions/question', question: question
+
+    = link_to "Добавить вопрос", "#", "data-target" => '#newQuestionModal', class: "btn add-question", "data-toggle" => "modal"
 
   .actions = f.submit "Сохранить урок", class: 'btn btn-success'
 

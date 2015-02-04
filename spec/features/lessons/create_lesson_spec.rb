@@ -78,16 +78,5 @@ feature 'Teacher creates a lesson',
         expect(page).to have_content 'Не получилось сохранить Урок'
       end
     end
-
-    # context 'with invalid image' do
-    #   scenario 'upload avatar' do
-    #     attach_file "Фото", File.join(Rails.root, "spec", "spec_helper.rb")
-    #     click_on 'Сохранить'
-
-    #     expect(page).to have_content("Вы не можете загружать файлы типа")
-    #     expect(page.find('.avatar')['src']).
-    #       to_not eq("/uploads/user/avatar/#{user.id}/medium_logo.png")
-    #   end
-    # end
   end
 end

@@ -1,0 +1,26 @@
+<% if @question.errors.empty? %>
+  $('.modal').modal('hide');
+  $('#content').prepend(
+    '<%= j render 'layouts/messages', flash: tr(:question, 'created') %>'
+  );
+  $('#new_question #question_text').val('');
+  $('#new_question #question_answers_attributes_0_text').val('');
+  $('#new_question .question-errors').hide();
+  $("#new_question .field_with_errors").each(function(){
+    $(this).replaceWith($(this).html());
+  });
+
+  $('.questions').append(
+    '<li> <%= j render 'questions/question', question: @question %> </li>'
+  );
+  $('.questions .question').last().css('background-color', '#fffff7');
+
+  $('#content > form').append(
+    '<%= hidden_field_tag "questions[]", @question.id %> '
+  );
+
+<% else %>
+  $('#new_question').html(
+    '<%= j render 'questions/form', question: @question %>'
+  );
+<% end %>

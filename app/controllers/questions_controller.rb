@@ -23,10 +23,14 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
 
-    if @question.save
-      redirect_to @question, notice: 'Question was successfully created.'
-    else
-      render :new
+    respond_to do |format|
+      if @question.save
+        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.js
+      else
+        format.html
+        format.js
+      end
     end
   end
 

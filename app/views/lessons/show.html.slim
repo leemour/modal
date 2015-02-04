@@ -15,7 +15,10 @@ p
   - @lesson.images.each do |image|
     = image_tag image.file.url(:medium), class: 'image' if image.persisted?
 
-
+h5 Вопросы
+ol.questions
+  - @lesson.questions.each do |question|
+    li= render 'questions/question', question: question
 
 = link_to lessons_path, class: "btn btn-link" do
   i.icon-arrow-left

@@ -1,18 +1,23 @@
 h1 Listing questions
 
-table
+table.table.table-striped.table-bordered
   thead
     tr
-      th
-      th
+      th Текст
+      th Итоговый
+      th Ответы
       th
 
   tbody
     - @questions.each do |question|
       tr
-        td = link_to 'Show', question
-        td = link_to 'Edit', edit_question_path(question)
-        td = link_to 'Destroy', question, data: {:confirm => 'Are you sure?'}, :method => :delete
+        td= question.text
+        td= question.final
+        td= question.answers.count
+        td
+          = link_to 'Show', question
+          = link_to 'Edit', edit_question_path(question)
+          = link_to 'Destroy', question, data: {:confirm => 'Are you sure?'}, :method => :delete
 
 br
 

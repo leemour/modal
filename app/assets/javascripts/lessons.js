@@ -1,20 +1,26 @@
 $(function() {
   Under = {
-    addFileInput: function(link, container) {
-      var upload = $(link).closest(container).find('.file-upload').last().clone();
-      var count = upload.html().match(/attributes\]\[(\d+)\]/)[1];
+    extraInput: function(link, container, inputClass) {
+      var input = $(link).closest(container).find(inputClass).last().clone();
+      var count = input.html().match(/attributes\]\[(\d+)\]/)[1];
       count++;
-      upload.html(
-        upload.html()
+      input.html(
+        input.html()
         .replace(/attributes\]\[\d+\]/mg, 'attributes]['+count+']')
         .replace(/attributes_\d+/mg, 'attributes_'+count)
       );
-      upload.insertBefore($(link));
+      return input;
     }
   }
 
   $('.lessons form').on('click', '.add-file', function(ev) {
     ev.preventDefault(); ev.stopPropagation();
-    Under.addFileInput(this, 'form')
+    input = Under.extraInput(this, 'form', '.file-upload');
+    input.insertBefore($(this));
+  });
+  $('.lessons .modal').on('click', '.add-answer', function(ev) {
+    ev.preventDefault(); ev.stopPropagation();
+    input = Under.extraInput(this, 'form', '.answer');
+    $('.modal table').append(input);
   });
 });

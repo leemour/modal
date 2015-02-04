@@ -1,0 +1,17 @@
+.question id="question-#{question.id}"
+  p.question-text
+    = question.text
+    - if question.final?
+      span.label.label-info для итогового тестирования
+  p.no-margin
+    strong Ответы
+  ol.answers
+    - question.answers.each do |answer|
+      li.answer
+        = answer.text
+        - if answer.correct?
+          span.label.label-success правильный
+
+  .actions
+    = link_to 'Редактировать', [:edit, question], class: 'btn btn-small'
+    = link_to 'Удалить', question, data: {confirm: 'Вы уверены?'}, method: :delete, class: 'btn btn-small btn-danger'

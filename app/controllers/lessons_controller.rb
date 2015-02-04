@@ -26,6 +26,8 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new(lesson_params)
 
     if @lesson.save
+      questions_ids = params[:lesson][:questions]
+      Question.where(id: questions_ids).update_all(lesson_id: @lesson.id)
       redirect_to @lesson, notice: 'Урок успешно создан.'
     else
       @lesson.images.build if @lesson.images.empty?
@@ -36,6 +38,8 @@ class LessonsController < ApplicationController
   # PATCH/PUT /lessons/1
   def update
     if @lesson.update(lesson_params)
+      questions_ids = params[:questions]
+      Question.where(id: questions_ids).update_all(lesson_id: @lesson.id)
       redirect_to @lesson, notice: 'Урок успешно отредактирован.'
     else
       render :edit
@@ -56,7 +60,7 @@ class LessonsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def lesson_params
-      params.require(:lesson).permit(:name, :description,
+      params.require(:lesson).permit(:name, :description, :questions,
         images_attributes: [:id, :file, :_destroy])
     end
 end
