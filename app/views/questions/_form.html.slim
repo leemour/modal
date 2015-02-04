@@ -28,9 +28,10 @@
               = a.check_box :correct
               = t('activerecord.attributes.answer.correct')
 
-          td.destroy
-            - if a.object.persisted?
-              | Удалить
-              = a.check_box '_destroy'
+          td.delete
+            - delete_link = a.object.persisted? ? a.object : '#'
+            - delete_class = a.object.persisted? ? "" : "only-html"
+            = link_to delete_link, data: {confirm: 'Вы уверены?', toggle: "tooltip"}, method: :delete, class: "delete-answer #{delete_class}", title: "Удалить ответ" do
+              i.icon-remove
 
   = link_to "Добавить ответ", '#', class: "add-answer btn btn-info btn-small"

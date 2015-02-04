@@ -20,18 +20,45 @@ feature 'Teacher adds question to a lesson',
       click_on "Добавить вопрос"
     end
 
-    scenario "short text" do
-      fill_in 'question_text', with: 'Ф'
-      click_on 'Сохранить вопрос'
+    context "without answer" do
+      scenario "short text" do
+        fill_in 'question_text', with: 'Ф'
+        click_on 'Сохранить вопрос'
 
-      expect(page).to have_content 'Текст вопроса недостаточной длины'
+        expect(page).to have_content 'Текст вопроса недостаточной длины'
+        expect(page).to_not have_content 'Вопрос успешно создан.'
+      end
+
+      scenario "valid text" do
+        fill_in 'question_text', with: 'Классный вопрос'
+        click_on 'Сохранить вопрос'
+
+        expect(page).to have_content 'Текст ответа недостаточной длины'
+        expect(page).to_not have_content 'Вопрос успешно создан.'
+      end
     end
 
-    scenario "valid text" do
-      fill_in 'question_text', with: 'Классный вопрос'
-      click_on 'Сохранить вопрос'
+    context 'with answer' do
+      background do
+        fill_in 'question_text', with: 'Классный вопрос'
+      end
 
-      expect(page).to have_content 'Текст вопроса недостаточной длины'
+      context "one answer" do
+        scenario "no text" do
+          fill_in 'question_answers_attributes_0_text', with: ''
+          click_on 'Сохранить вопрос'
+
+          expect(page).to have_content 'Текст ответа не может быть пустым'
+          expect(page).to_not have_content 'Вопрос успешно создан.'
+        end
+
+        scenario "valid text" do
+          fill_in 'question_answers_attributes_0_text', with: 'Правильный ответ'
+          click_on 'Сохранить вопрос'
+
+          expect(page).to have_content 'Вопрос успешно создан.'
+        end
+      end
     end
   end
 end

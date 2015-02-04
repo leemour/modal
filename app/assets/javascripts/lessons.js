@@ -23,4 +23,10 @@ $(function() {
     input = Under.extraInput(this, 'form', '.answer');
     $('.modal table').append(input);
   });
+  $('.lessons .modal').on('click', '.delete-answer.only-html', function(ev) {
+    ev.preventDefault(); ev.stopPropagation();
+    if ($(this).closest('table').find('tr').size() > 1) {
+      $(this).closest('tr').remove();
+    }
+  });
 });
