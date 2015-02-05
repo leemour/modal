@@ -23,4 +23,8 @@ module ApplicationHelper
   def lesson_questions
     params[:questions] || []
   end
+
+  def lesson_questions_to_attach
+    Question.find(lesson_questions)
+  end
 end

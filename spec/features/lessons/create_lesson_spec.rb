@@ -27,21 +27,59 @@ feature 'Teacher creates a lesson',
   end
 
   feature "fill text fields" do
-    scenario "short text" do
-      fill_in 'lesson_name', with: 'Ф'
-      fill_in 'lesson_description', with: 'Ф'
-      click_on 'Сохранить урок'
+    context "short text" do
+      background do
+        fill_in 'lesson_name', with: 'Ф'
+        fill_in 'lesson_description', with: 'Ф'
+      end
 
-      expect(page).to have_content 'Название недостаточной длины'
-      expect(page).to have_content 'Описание недостаточной длины'
+      scenario "text only" do
+        click_on 'Сохранить урок'
+
+        expect(page).to have_content 'Название недостаточной длины'
+        expect(page).to have_content 'Описание недостаточной длины'
+      end
+
+      scenario "with question", js: true do
+        click_on "Добавить вопрос"
+        fill_in 'question_text', with: 'Классный вопрос'
+        fill_in 'question_answers_attributes_0_text', with: 'Правильный ответ'
+        click_on 'Сохранить вопрос'
+
+        click_on 'Сохранить урок'
+
+        expect(page).to have_content 'Название недостаточной длины'
+        expect(page).to have_content 'Описание недостаточной длины'
+        expect(page).to have_content 'Классный вопрос'
+        expect(page).to have_content 'Правильный ответ'
+      end
     end
 
-    scenario "long text" do
-      fill_in 'lesson_name', with: 'Это коварный урок'
-      fill_in 'lesson_description', with: 'Отличное описание интеересного урока которое подойдет для всех и каждого'
-      click_on 'Сохранить урок'
+    context "long text" do
+      background do
+        fill_in 'lesson_name', with: 'Это коварный урок'
+        fill_in 'lesson_description', with: 'Отличное описание интеересного урока которое подойдет для всех и каждого'
+      end
 
-      expect(page).to have_content 'Урок успешно создан.'
+      scenario "text only" do
+        click_on 'Сохранить урок'
+
+        expect(page).to have_content 'Урок успешно создан.'
+      end
+
+      scenario "with question", js: true do
+        click_on "Добавить вопрос"
+        fill_in 'question_text', with: 'Классный вопрос'
+        fill_in 'question_answers_attributes_0_text', with: 'Правильный ответ'
+        click_on 'Сохранить вопрос'
+
+        click_on 'Сохранить урок'
+
+        expect(page).to have_content 'Урок успешно создан.'
+        expect(page).to have_content 'Классный вопрос'
+        expect(page).to have_content 'Правильный ответ'
+      end
+
     end
   end
 

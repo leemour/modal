@@ -13,9 +13,6 @@
     = f.label :description
     = f.text_area :description
 
-  - lesson_questions.each do |question_id|
-    = hidden_field_tag "questions[]", question_id
-
   .form-group
     h4 Фото
     = f.fields_for :images do |i|
@@ -40,7 +37,13 @@
       - @lesson.questions.each do |question|
         li= render 'questions/question', question: question
 
+      - lesson_questions_to_attach.each do |associated_question|
+        li= render 'questions/question', question: associated_question
+
     = link_to "Добавить вопрос", "#", "data-target" => '#newQuestionModal', class: "btn add-question", "data-toggle" => "modal"
+
+    - lesson_questions.each do |question_id|
+      = hidden_field_tag "questions[]", question_id
 
   .actions = f.submit "Сохранить урок", class: 'btn btn-success'
 
